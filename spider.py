@@ -9,7 +9,7 @@ import os
 from dfttopif import directory_to_pif
 import pprint
 from pymongo import MongoClient
-
+from datetime import datetime
 from mongo_utils import *
 
 
@@ -31,6 +31,7 @@ def DFT_spider(database = 'PIFs', collection = 'DFT', username = None, password 
                 path = os.path.abspath(os.path.join(root,directory))
                 post['user_created'] = username
                 post['path'] = path
+                post['time_created'] = str(datetime.now())
                 pp.pprint('')
                 pp.pprint('found: ' + path)
 
@@ -115,10 +116,29 @@ def DFT_delete(query,database = 'PIFs', collection = 'DFT', username = None, pas
                 pp.pprint('Documents Not deleted')         
     return
 
-if __name__ == "__main__":
-    username, password = user_authentication()
-    DFT_spider(database = 'PIFs', collection = 'DFT', username = username, password = password)
-    DFT_query(database = 'PIFs', collection = 'DFT', query = {}, username = username, password = password)
-    DFT_delete({'path':'/gpfs/pace1/project/chbe-medford/medford-share/users/bcomer3/espresso_rutile/espresso_Rutile/2_layer_runs/N/test/esp.log'},database = 'PIFs', collection = 'DFT', username = username, password = password)
+def DFT_insert_one(post,database = 'PIFs', collection = 'DFT', username = None, password = None):
+    if username == None or password == None:
+        username, password = user_authentication()
+    user_uri  = get_Client_uri(username, password)
+    client = MongoClient(user_uri)
+    db=client[database]
+    collection = db[collection]
+    pp = pprint.PrettyPrinter()
+    
+    if 'user_created' not in post:
+        post['user_created'] = username
+    if 'time_created' not in post:
+        post['time_created'] = str(datetime.now())
+    collection.insert_one(post)
+    pp.pprint('Document added')    
+    
+    return
+        
+
+#if __name__ == "__main__":
+#    username, password = user_authentication()
+#    DFT_spider(database = 'PIFs', collection = 'DFT', username = username, password = password)
+#    DFT_query(database = 'PIFs', collection = 'DFT', query = {}, username = username, password = password)
+#    DFT_delete({'path':'/gpfs/pace1/project/chbe-medford/medford-share/users/bcomer3/espresso_rutile/espresso_Rutile/2_layer_runs/N/test/esp.log'},database = 'PIFs', collection = 'DFT', username = username, password = password)
 #for post in collection.find():
 #    pprint.pprint(post)
