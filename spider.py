@@ -45,7 +45,7 @@ def DFT_spider(database = 'PIFs', collection = 'DFT', username = None, password 
     
     return
 
-def DFT_query(database = 'PIFs', collection = 'DFT', query = {}, username = None, password = None):
+def DFT_query(database = 'PIFs', collection = 'DFT', query = {}, username = None, password = None,printout = False):
     result = []
     if username == None or password == None:
         username, password = user_authentication()
@@ -55,7 +55,8 @@ def DFT_query(database = 'PIFs', collection = 'DFT', query = {}, username = None
     collection = db[collection]
     pp = pprint.PrettyPrinter()
     for post in collection.find(query):
-        pprint.pprint(post)
+        if printout == True:
+            pprint.pprint(post)
         result.append(post)
     pp.pprint('total documents found: ' + str(len(result)))
     return result
