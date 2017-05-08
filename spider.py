@@ -29,3 +29,6 @@ for root, dirs, files in os.walk(".", topdown=False):
             
         except:
             pp.pprint('failed')
+
+for post in posts.find():
+    pprint.pprint(post)
