@@ -13,13 +13,13 @@ from pymongo import MongoClient
 from mongo_utils import *
 
 
-def DFT_spider():
+def DFT_spider(database = 'PIFs', collection = 'DFT'):
 
     user_uri, username, password = get_Client_uri()
     client = MongoClient(user_uri)
-    db=client['PIFs']
+    db=client[database]
     #posts = db.posts
-    collection = db['DFT']
+    collection = db[collection]
     pp = pprint.PrettyPrinter()
     
     for root, dirs, files in os.walk(".", topdown=False):
@@ -40,6 +40,6 @@ def DFT_spider():
     return 
 
 if __name__ == "__main__":
-    DFT_spider()
+    DFT_spider('PIFs','DFT')
 #for post in collection.find():
 #    pprint.pprint(post)
