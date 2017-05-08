@@ -31,13 +31,16 @@ def DFT_spider(database = 'PIFs', collection = 'DFT', username = None, password 
                 path = os.path.abspath(os.path.join(root,directory))
                 post['user_created'] = username
                 post['path'] = path
-                pp.pprint('succeed: ' + path)
+                pp.pprint('found: ' + path)
 #                pp.pprint(post)
                 pp.pprint(type(path))
-                temp = DFT_query(database = database, collection = collection, query = {'path': str(path)}, username = username, password = password)
+                pp.pprint(path)
+                temp = collection.find({'path': str(path)})
+#                temp = DFT_query(database = database, collection = collection, query = {'path': str(path)}, username = username, password = password)
                 pp.pprint(len(temp))                
                 if len(temp) == 0:
                     collection.insert_one(post)
+                    pp.pprint('successfully inserted to database')
                 else:
                     pp.pprint('director already in database: ' + path)
                     pp.pprint('delete the existing document to update')
