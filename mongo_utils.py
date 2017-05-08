@@ -23,4 +23,4 @@ def get_Client_uri():
         username = raw_input('user name: ')
         password = raw_input('password: ')
         
-    return "mongodb://" + username + ":" + password + "@54.201.152.64/PIFs"
+    return "mongodb://" + username + ":" + password + "@54.201.152.64/PIFs", username, password
