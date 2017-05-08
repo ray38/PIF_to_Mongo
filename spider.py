@@ -33,7 +33,8 @@ def DFT_spider(database = 'PIFs', collection = 'DFT', username = None, password 
                 post['path'] = path
                 pp.pprint('succeed: ' + path)
 #                pp.pprint(post)
-                temp = DFT_query(database = database, collection = collection, query = {'path': path}, username = username, password = password)
+                pp.pprint(type(path))
+                temp = DFT_query(database = database, collection = collection, query = {'path': str(path)}, username = username, password = password)
                 pp.pprint(len(temp))                
                 if len(temp) == 0:
                     collection.insert_one(post)
