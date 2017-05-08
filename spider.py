@@ -31,17 +31,20 @@ def DFT_spider(database = 'PIFs', collection = 'DFT', username = None, password 
                 path = os.path.abspath(os.path.join(root,directory))
                 post['user_created'] = username
                 post['path'] = path
-                pp.pprint('\nfound: ' + path)
+                pp.pprint('')
+                pp.pprint('found: ' + path)
 
                 temp_query = {'path': path}
                 temp = collection.find(temp_query).count()
            
                 if temp == 0:
                     collection.insert_one(post)
-                    pp.pprint('successfully inserted to database\n')
+                    pp.pprint('successfully inserted to database')
+                    pp.pprint('')
                 else:
                     pp.pprint('** WARNING: director already in database **')
-                    pp.pprint('delete the existing document to update\n')
+                    pp.pprint('delete the existing document to update')
+                    pp.pprint('')
                 
             except:
                 pass
@@ -73,25 +76,43 @@ def DFT_delete(query,database = 'PIFs', collection = 'DFT', username = None, pas
     collection = db[collection]
     pp = pprint.PrettyPrinter()
     delete_number = collection.find(query).count()
-    
-    pp.pprint('\n **** WARNING ****: you are about to delete {} documents!!'.format(delete_number))
+    pp.pprint('')
+    pp.pprint('**** WARNING ****: you are about to delete {} documents!!'.format(delete_number))
     pp.pprint('You are abusolutly sure about what you are doing right?')
     
-    if delete_number <= 3:
-        check = raw_input('y/n: ')
-        if check == 'y':
-            collection.delete_many(query)
-            pp.pprint('Documents deleted')
+    if sys.version_info[0] == 3:
+        if delete_number <= 3:
+            check = input('y/n: ')
+            if check == 'y':
+                collection.delete_many(query)
+                pp.pprint('Documents deleted')
+            else:
+                pp.pprint('Documents Not deleted')
+    
         else:
-            pp.pprint('Documents Not deleted')
-
+            check = input('type [YesDelete] to delete: ')
+            if check == 'YesDelete':
+                collection.delete_many(query)
+                pp.pprint('Documents deleted')
+            else:
+                pp.pprint('Documents Not deleted')     
+    
     else:
-        check = raw_input('type [YesDelete] to delete: ')
-        if check == 'YesDelete':
-            collection.delete_many(query)
-            pp.pprint('Documents deleted')
+        if delete_number <= 3:
+            check = raw_input('y/n: ')
+            if check == 'y':
+                collection.delete_many(query)
+                pp.pprint('Documents deleted')
+            else:
+                pp.pprint('Documents Not deleted')
+    
         else:
-            pp.pprint('Documents Not deleted')            
+            check = raw_input('type [YesDelete] to delete: ')
+            if check == 'YesDelete':
+                collection.delete_many(query)
+                pp.pprint('Documents deleted')
+            else:
+                pp.pprint('Documents Not deleted')         
     return
 
 if __name__ == "__main__":
