@@ -26,11 +26,5 @@ def user_authentication():
     return username, password
 
 def get_Client_uri(username,password):
-#    if sys.version_info[0] == 3:
-#        username = input('user name: ')
-#        password = input('password: ')
-#    else:
-#        username = raw_input('user name: ')
-#        password = raw_input('password: ')
         
     return "mongodb://" + username + ":" + password + "@54.201.152.64/PIFs"
