@@ -32,8 +32,13 @@ def DFT_spider(database = 'PIFs', collection = 'DFT', username = None, password 
                 post['user_created'] = username
                 post['path'] = path
                 pp.pprint('succeed: ' + path)
-                pp.pprint(post)
-                collection.insert_one(post)
+#                pp.pprint(post)
+                temp = DFT_query(database = database, collection = collection, query = {'path': path}, username = username, password = password)
+                if len(temp) == 0:
+                    collection.insert_one(post)
+                else:
+                    pp.pprint('director already in database: ' + path)
+                    pp.pprint('delete the existing document to update')
                 
             except:
                 pass
