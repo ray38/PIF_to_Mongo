@@ -25,7 +25,7 @@ for root, dirs, files in os.walk(".", topdown=False):
         try:
             data = directory_to_pif(os.path.join(root,directory))
             post = data.as_dictionary()
-            post['path'] = os.path.join(root,directory)
+            post['path'] = os.path.abspath(os.path.join(root,directory))
             pp.pprint('succeed: ' + os.path.join(root,directory))
             pp.pprint(post)
             collection.insert_one(post)
