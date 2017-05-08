@@ -135,10 +135,10 @@ def DFT_insert_one(post,database = 'PIFs', collection = 'DFT', username = None, 
     return
         
 
-if __name__ == "__main__":
-    username, password = user_authentication()
-    DFT_spider(database = 'PIFs', collection = 'DFT', username = username, password = password)
-    DFT_query(database = 'PIFs', collection = 'DFT', query = {}, username = username, password = password,printout = True)
-    DFT_delete({'path':'/gpfs/pace1/project/chbe-medford/medford-share/users/bcomer3/espresso_rutile/espresso_Rutile/2_layer_runs/N/test/esp.log'},database = 'PIFs', collection = 'DFT', username = username, password = password)
+#if __name__ == "__main__":
+#    username, password = user_authentication()
+#    DFT_spider(database = 'PIFs', collection = 'DFT', username = username, password = password)
+#    DFT_query(database = 'PIFs', collection = 'DFT', query = {}, username = username, password = password,printout = True)
+#    DFT_delete({'path':'/gpfs/pace1/project/chbe-medford/medford-share/users/bcomer3/espresso_rutile/espresso_Rutile/2_layer_runs/N/test/esp.log'},database = 'PIFs', collection = 'DFT', username = username, password = password)
 #for post in collection.find():
 #    pprint.pprint(post)
