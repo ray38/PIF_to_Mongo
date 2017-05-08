@@ -10,7 +10,7 @@ from dfttopif import directory_to_pif
 import pprint
 from pymongo import MongoClient
 from datetime import datetime
-from mongo_utils import *
+from mongo_utils import user_authentication, get_Client_uri
 
 
 def DFT_spider(database = 'PIFs', collection = 'DFT', username = None, password = None):
