@@ -13,12 +13,13 @@ from pymongo import MongoClient
 from mongo_utils import *
 
 
-def DFT_spider(database = 'PIFs', collection = 'DFT'):
-
-    user_uri, username, password = get_Client_uri()
+def DFT_spider(database = 'PIFs', collection = 'DFT', username = None, password = None):
+    
+    if username == None or password == None:
+        username, password = user_authentication()
+    user_uri  = get_Client_uri(username, password)
     client = MongoClient(user_uri)
     db=client[database]
-    #posts = db.posts
     collection = db[collection]
     pp = pprint.PrettyPrinter()
     
@@ -37,9 +38,24 @@ def DFT_spider(database = 'PIFs', collection = 'DFT'):
             except:
                 pass
     
-    return 
+    return
+
+def DFT_query(database = 'PIFs', collection = 'DFT', query = {}, username = None, password = None):
+    result = []
+    if username == None or password == None:
+        username, password = user_authentication()
+    user_uri  = get_Client_uri(username, password)
+    client = MongoClient(user_uri)
+    db=client[database]
+    collection = db[collection]
+    pp = pprint.PrettyPrinter()
+    for post in collection.find(query):
+        pprint.pprint(post)
+        result.append(post)
+    return result
 
 if __name__ == "__main__":
-    DFT_spider('PIFs','DFT')
+    DFT_spider(database = 'PIFs', collection = 'DFT')
+    DFT_query(database = 'PIFs', collection = 'DFT', query = {})
 #for post in collection.find():
 #    pprint.pprint(post)

@@ -15,12 +15,22 @@ import sys
 #client = MongoClient('localhost', 27017)
 
 
-def get_Client_uri():
+def user_authentication():
     if sys.version_info[0] == 3:
         username = input('user name: ')
         password = input('password: ')
     else:
         username = raw_input('user name: ')
         password = raw_input('password: ')
+    
+    return username, password
+
+def get_Client_uri(username,password):
+#    if sys.version_info[0] == 3:
+#        username = input('user name: ')
+#        password = input('password: ')
+#    else:
+#        username = raw_input('user name: ')
+#        password = raw_input('password: ')
         
-    return "mongodb://" + username + ":" + password + "@54.201.152.64/PIFs", username, password
+    return "mongodb://" + username + ":" + password + "@54.201.152.64/PIFs"
