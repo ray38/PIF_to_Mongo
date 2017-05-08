@@ -6,6 +6,7 @@ Created on Mon May  8 09:57:55 2017
 """
 
 from pymongo import MongoClient
+import sys
 
 
 #client = MongoClient("mongodb://xlei38:`Kuyue5689740@54.201.152.64/PIFs")
@@ -15,6 +16,11 @@ from pymongo import MongoClient
 
 
 def get_Client_uri():
-    username = input('user name: ')
-    password = input('password: ')
+    if sys.version_info[0] == 3:
+        username = input('user name: ')
+        password = input('password: ')
+    else:
+        username = raw_input('user name: ')
+        password = raw_input('password: ')
+        
     return "mongodb://" + username + ":" + password + "@54.201.152.64/PIFs"
