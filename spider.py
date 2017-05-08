@@ -52,10 +52,12 @@ def DFT_query(database = 'PIFs', collection = 'DFT', query = {}, username = None
     for post in collection.find(query):
         pprint.pprint(post)
         result.append(post)
+    pp.pprint('total documents found: ' + str(len(result)))
     return result
 
 if __name__ == "__main__":
-    DFT_spider(database = 'PIFs', collection = 'DFT')
-    DFT_query(database = 'PIFs', collection = 'DFT', query = {})
+    username, password = user_authentication()
+    DFT_spider(database = 'PIFs', collection = 'DFT', username = username, password = password)
+    DFT_query(database = 'PIFs', collection = 'DFT', query = {}, username = username, password = password)
 #for post in collection.find():
 #    pprint.pprint(post)
