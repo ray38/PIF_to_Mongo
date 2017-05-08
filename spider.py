@@ -33,9 +33,9 @@ def DFT_spider(database = 'PIFs', collection = 'DFT', username = None, password 
                 post['path'] = path
                 pp.pprint('found: ' + path)
 #                pp.pprint(post)
-                pp.pprint(type(path))
-                pp.pprint(path)
-                temp = collection.find({'path': str(path)})
+#                pp.pprint(type(path))
+#                pp.pprint(path)
+                temp = collection.find({'path': path})
 #                temp = DFT_query(database = database, collection = collection, query = {'path': str(path)}, username = username, password = password)
                 pp.pprint(len(temp))                
                 if len(temp) == 0:
