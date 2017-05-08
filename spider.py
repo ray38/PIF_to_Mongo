@@ -10,8 +10,11 @@ from dfttopif import directory_to_pif
 import pprint
 from pymongo import MongoClient
 
+from mongo_utils import *
 
-client = MongoClient("mongodb://xlei38:`Kuyue5689740@54.201.152.64/PIFs")
+
+user_uri = get_Client_uri()
+client = MongoClient(user_uri)
 db=client['PIFs']
 posts = db.posts
 collection = db['DFT']
