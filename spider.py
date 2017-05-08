@@ -16,7 +16,7 @@ from mongo_utils import *
 user_uri = get_Client_uri()
 client = MongoClient(user_uri)
 db=client['PIFs']
-posts = db.posts
+#posts = db.posts
 collection = db['DFT']
 pp = pprint.PrettyPrinter()
 
@@ -25,13 +25,13 @@ for root, dirs, files in os.walk(".", topdown=False):
         try:
             data = directory_to_pif(os.path.join(root,directory))
             post = data.as_dictionary()
+            post['path'] = os.path.join(root,directory)
             pp.pprint('succeed: ' + os.path.join(root,directory))
             pp.pprint(post)
-            posts.insert_one(post)
-#            pp
+            collection.insert_one(post)
             
         except:
             pp.pprint('failed')
 
-for post in posts.find():
+for post in collection.find():
     pprint.pprint(post)
