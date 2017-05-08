@@ -8,9 +8,9 @@ Created on Mon May  8 09:57:55 2017
 from pymongo import MongoClient
 
 
-client = MongoClient("mongodb://xlei38:`Kuyue5689740@54.201.152.64/PIFs")
-db=client['PIFs']
-collection = db['test']
+#client = MongoClient("mongodb://xlei38:`Kuyue5689740@54.201.152.64/PIFs")
+#db=client['PIFs']
+#collection = db['test']
 #client = MongoClient('localhost', 27017)
 
 
