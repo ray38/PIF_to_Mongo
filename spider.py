@@ -19,4 +19,4 @@ for root, dirs, files in os.walk(".", topdown=False):
             pp.pprint('succeed: ' + os.path.join(root,directory))
             
         except:
-            pprint('failed')
+            pp.pprint('failed')
